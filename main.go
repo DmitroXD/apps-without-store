@@ -15,9 +15,6 @@ import (
 )
 
 const storeUrl = "https://store.rg-adguard.net/api/GetFiles"
-const token = "9NKSQGP7F2NH"
-const microsoftUrl = "https://www.microsoft.com/store/apps"
-const appUrl = microsoftUrl + "/" + token
 
 var client = http.Client{}
 var logger = log.New(os.Stdout, "INFO: ", log.Ldate|log.Ltime|log.Lshortfile)
@@ -57,12 +54,6 @@ func (l *Loader) Add(item Item) {
         l.Msixbundle = append(l.Msixbundle, item)
     }
 }
-
-func extractToken(url string) string {
-    parts := strings.Split(url, "/")
-    return parts[len(parts)-1]
-}
-
 
 func downloadFile(item Item) (string, error) {
     logger.Printf("Starting download for %s\n", item.Name)
